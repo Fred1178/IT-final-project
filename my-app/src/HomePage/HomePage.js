@@ -4,11 +4,11 @@ import './HomePage.css';
     right now there is only one. 
     
 */
-function HomePage() {
+function HomePage({onEnemyClick}) {
     return (
         <div class="game-container">
             <div id="GameMap">
-                <button type="button" class= "enemyButton firstEnemy"></button>
+                <button type="button" class= "enemyButton firstEnemy" onClick={onEnemyClick}></button>
             </div> 
             <div class="game-menu inventory">
                 <h4>Inventory</h4>
