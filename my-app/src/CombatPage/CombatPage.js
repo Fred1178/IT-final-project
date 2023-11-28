@@ -1,6 +1,7 @@
 import './CombatPage.css';
 import Enemy from  './Enemy.js';
 
+
 const Player = {
     name: "You",
     health: 100,
@@ -10,7 +11,7 @@ const Player = {
 };
 
 
-const Goblin = new Enemy("Goblin", 50, 50, 30);
+const Goblin = new Enemy("Goblin", "images/goblin.jpg",50, 50, 30);
 
 /*
     why doesn't onClick work? it just sets the new health automatically
@@ -38,6 +39,9 @@ function CombatPage() {
                 <div class="log"></div>
                 <div class="enemy">
                     <p class="name"> {Goblin.name}</p>
+                    <div class="image">
+                        <img src={Goblin.img} alt="Goblin"/>
+                    </div>
                     <p class="health">Health: {Goblin.health} / {Goblin.maxHealth}</p>
                 </div>
                 <button type="button" class="combatButton attack" onClick={takeDamage(Goblin, Player)}>Attack</button>
