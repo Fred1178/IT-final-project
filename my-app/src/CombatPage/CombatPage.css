@@ -1,0 +1,44 @@
+
+.game-container {
+    margin: auto;
+    width: 1200px;
+    
+    display: grid;
+    grid-template-columns: repeat(24, 50px);
+    grid-template-rows: repeat(13, 50px);
+    background-color: gray;
+}
+
+
+.attack {
+    grid-row: 12 / 13;
+    grid-column: 2 / 4;
+}
+
+.heal {
+    grid-row: 12 / 13;
+    grid-column: 5 / 7;
+}
+
+.player {
+    grid-row: 1 / 11;
+    grid-column: 1 / 10;
+    border: 2px solid blue;
+    padding: 10px;
+}
+
+.combatLog {
+    grid-row: 1 / 11;
+    grid-column: 11 / 16;
+}
+
+.enemy {
+    grid-row: 1 / 11;
+    grid-column: 16 / 25;
+    border: 2px solid red;
+    padding: 10px;
+}
+
+.name {
+    text-align: center;
+}

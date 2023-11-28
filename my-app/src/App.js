@@ -18,7 +18,6 @@ function App() {
 
   
 
-
   const [screen, setScreen] = useState(CurrentScreen);
   switch(screen) {
     case 'login':

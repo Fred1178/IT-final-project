@@ -1,8 +1,11 @@
+
+
 .game-container {
-    margin-left: 20px;
+    margin: auto;
     display: grid;
+    width: 1200px;
     grid-template-columns: repeat(24, 50px);
-    grid-template-rows: repeat(12, 50px);
+    grid-template-rows: repeat(13, 50px);
 }
 
 #GameMap {
