@@ -46,6 +46,12 @@ function CombatPage() {
     function enemyTakeDamage(enemy, player) {
         enemy.health = enemy.health - player.damage;
         setEnemy(enemy);
+        /*
+        when i use console.log(enemy), the health is shown as a very low negative number, 
+        and goes up by 20 whenever I click the attack button, 
+        it only goes up in the console, not on the page
+        */
+        console.log(enemy); 
     }
 
     return (
