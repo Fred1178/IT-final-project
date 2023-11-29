@@ -1,5 +1,6 @@
 import './CombatPage.css';
 import Enemy from  './Enemy.js';
+import { useState } from 'react';
 
 
 const Player = {
@@ -16,36 +17,49 @@ const Goblin = new Enemy("Goblin", "images/goblin.jpg",50, 50, 30);
 /*
     why doesn't onClick work? it just sets the new health automatically
 */
-function takeDamage(target, attacker) {
-    target.health = target.health - attacker.damage;
+
+function PlayerComponent({name, health, maxHealth}) {
+    return (
+        <div className="player">
+                <p className="name">{name}</p>
+                <p>Health: {health} / {maxHealth}</p>
+        </div>
+    );
 }
 
-
-
+function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
+    return (
+        <div className="enemy">
+                    <p className="name"> {name}</p>
+                    <div className="image">
+                        <img src={imgURL} alt={imgAlt}/>
+                    </div>
+                    <p className="health">Health: {health} / {maxHealth}</p>
+        </div>
+    );
+}
+ 
 function CombatPage() {
+    const [player, _setPlayer] = useState(Player);
+    const [enemy, setEnemy] = useState(Goblin);
 
+    function enemyTakeDamage(enemy, player) {
+        enemy.health = enemy.health - player.damage;
+        setEnemy(enemy);
+    }
 
     return (
         <div>
-            <div class="header">
+            <div className="header">
                 <h1>My Game</h1>
                 <p>this is my game</p>
             </div>
-            <div class="game-container">
-                <div class="player">
-                    <p class="name">{Player.name}</p>
-                    <p>Health: {Player.health} / {Player.maxHealth}</p>
-                </div>
-                <div class="log"></div>
-                <div class="enemy">
-                    <p class="name"> {Goblin.name}</p>
-                    <div class="image">
-                        <img src={Goblin.img} alt="Goblin"/>
-                    </div>
-                    <p class="health">Health: {Goblin.health} / {Goblin.maxHealth}</p>
-                </div>
-                <button type="button" class="combatButton attack" onClick={takeDamage(Goblin, Player)}>Attack</button>
-                <button type="button" class="combatButton heal">Heal (10) </button>
+            <div className="game-container">
+                <PlayerComponent name={player.name} health={player.health} maxHealth={player.maxHealth}/>
+                <div className="log"></div>
+                <EnemyComponent name={enemy.name} imgURL={enemy.img} imgAlt={enemy.name} health={enemy.health} maxHealth={enemy.maxHealth}/>
+                <button type="button" className="combatButton attack" onClick={() => enemyTakeDamage(enemy, player)}>Attack</button>
+                <button type="button" className="combatButton heal">Heal (10) </button>
             </div>
         </div>
     );
