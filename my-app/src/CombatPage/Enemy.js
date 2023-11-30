@@ -1,10 +1,10 @@
 class Enemy {
-    constructor(name, img, health, maxHealth, attackDmg) {
+    constructor(name, img, health, maxHealth, damage) {
         this.name = name;
         this.img = img;
         this.health = health;
         this.maxHealth = maxHealth;
-        this.attackDmg = attackDmg;
+        this.damage = damage;
     }
 }
 

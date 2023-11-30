@@ -35,6 +35,15 @@ background-image: url("home-images/37389_halloween_head_skeleton_skull_icon.png"
 background-color: #000000;
 }
 
+.secondEnemy {
+    position: absolute;
+    left: 220px;
+    top: 100px;
+    
+    background-image: url("home-images/37389_halloween_head_skeleton_skull_icon.png");
+    background-color: #000000;
+    }
+
 .game-menu {
 padding: 5px;
 border: 2px dotted black;

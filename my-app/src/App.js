@@ -16,8 +16,6 @@ function App() {
   let CombatScreen = 'combat';
   let CurrentScreen = LoginScreen;
 
-  
-
   const [screen, setScreen] = useState(CurrentScreen);
   switch(screen) {
     case 'login':
@@ -26,11 +24,13 @@ function App() {
       );
     case 'home':
       return (
-        <HomePage onEnemyClick={() => setScreen(CombatScreen)}/>
+        <HomePage onEnemyClick={() => setScreen(CombatScreen)} />
       );
     case 'combat':
       return (
-        <CombatPage />
+        //I might do a player level system, where as you defeat an enemy, you go up a level,
+        //when the level goes up,  another enemy will appear
+        <CombatPage /> 
       ); 
     default:
       console.log("Error: No value for CurrentScreen");
