@@ -38,7 +38,7 @@ function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
         </div>
     );
 }
- 
+
 function CombatPage() {
     const [player, _setPlayer] = useState(Player);
     const [enemy, setEnemy] = useState(Goblin);

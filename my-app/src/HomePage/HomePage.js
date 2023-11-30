@@ -4,6 +4,7 @@ import './HomePage.css';
     right now there is only one. 
     
 */
+
 function HomePage({onEnemyClick}) {
     return (
         <div>
