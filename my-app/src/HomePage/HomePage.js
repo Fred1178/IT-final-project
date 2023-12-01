@@ -1,11 +1,12 @@
 import './HomePage.css';
-//import Player from './../CombatPage/CombatPage';
+
 /*
     the main home page of the game. The map shows the different enemies available to fight (marked by skull icon on the map)
     right now there is only one. 
     
 */
 /*
+
 function enemyButtons({handleClick}) {
     switch(Player.level) {
         case 1:
@@ -23,8 +24,8 @@ function enemyButtons({handleClick}) {
 
 
 <enemyButtons handleClick={onEnemyClick} level={{Player}}/>
-*/
 
+*/
 
 
 function HomePage({onEnemyClick}) {
@@ -39,6 +40,7 @@ function HomePage({onEnemyClick}) {
             <div className="game-container">
                 <div id="GameMap">
                     <button type="button" className="enemyButton firstEnemy" onClick={onEnemyClick}></button>
+                    <button type="button" className="enemyButton secondEnemy" onClick={onEnemyClick}></button>
                 </div> 
                 <div className="game-menu inventory">
                     <h4>Inventory</h4>

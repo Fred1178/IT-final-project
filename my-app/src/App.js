@@ -3,6 +3,7 @@ import './App.css';
 import HomePage from './HomePage/HomePage';
 import LoginPage from './LoginPage/LoginPage';
 import CombatPage from './CombatPage/CombatPage';
+import VictoryPage from './VictoryPage/VictoryPage';
 
 /*
   The app component is how it switches between the different screens in my game.
@@ -14,6 +15,7 @@ function App() {
   let HomeScreen = 'home';
   let LoginScreen = 'login';
   let CombatScreen = 'combat';
+  let WinScreen = 'win';
   let CurrentScreen = LoginScreen;
 
   const [screen, setScreen] = useState(CurrentScreen);
@@ -31,7 +33,11 @@ function App() {
         //I might do a player level system, where as you defeat an enemy, you go up a level,
         //when the level goes up,  another enemy will appear
         <CombatPage /> 
-      ); 
+      );
+    case 'win':
+      return (
+        <VictoryPage onReturnClick={() => setScreen(HomeScreen)} />
+      );
     default:
       console.log("Error: No value for CurrentScreen");
   }

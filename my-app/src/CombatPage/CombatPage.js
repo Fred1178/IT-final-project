@@ -1,6 +1,5 @@
 import './CombatPage.css';
 import Enemy from  './Enemy.js';
-
 import { useState } from 'react';
 
 
@@ -65,7 +64,11 @@ function CombatPage() {
         the console shows the enemy as losing health. The webpage doesn't show it
         */
         console.log(enemy); 
+        if (enemy.health <= 0) {
+            console.log("You Win!");
+        }
     }
+
 
     return (
         <div>
@@ -82,6 +85,7 @@ function CombatPage() {
             </div>
         </div>
     );
+    
 }
 
 export default CombatPage;
