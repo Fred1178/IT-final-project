@@ -1,23 +1,14 @@
 import './CombatPage.css';
-import Enemy from  '../models/Enemy.js';
+//import Enemy from  '../models/Enemy.js';
 import Player from '../models/Player.js';
 import { useState } from 'react';
 
+
 /*
-export const Player = {
-    name: "You",
-    img: "",
-    level: 1,
-    health: 100,
-    maxHealth: 100,
-    armor: "none",
-    damage: 20
-};
+const Goblin = new Enemy("Goblin", 1, "../../public/images/goblin.jpg", 50, 50, 15);
+const Orc = new Enemy("Orc", 2, "",100, 100, 30);
 
 */
-const Goblin = new Enemy("Goblin", "images/goblin.jpg", 50, 50, 15);
-const Orc = new Enemy("Orc", "",100, 100, 30);
-
 function PlayerComponent({name, level, health, maxHealth}) {
     return (
         <div className="player">
@@ -41,19 +32,19 @@ function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
 
 
 // selects which enemy you fight, based on the player level
-function chooseEnemy(level) {
+function chooseEnemy(level, enemyData) {
     switch(level) {
         case 1:
-            return (Goblin);
+            return (enemyData[0]);
         case 2:
-            return (Orc);
+            return (enemyData[1]);
         default:
             console.log("Error: no enemy chosen");
     }
 }
 
-function CombatPage({player, setPlayer}) {
-    const [enemy, setEnemy] = useState(chooseEnemy(player.level));
+function CombatPage({player, setPlayer, enemyData}) {
+    const [enemy, setEnemy] = useState(chooseEnemy(player.level, enemyData));
     
 
     function enemyTakeDamage(enemy, player) {
@@ -64,7 +55,8 @@ function CombatPage({player, setPlayer}) {
         */
         console.log(enemy); 
         if (enemy.defeated) {
-            player.level++; //turn into method in playerinfo
+            player.levelUp(); //turn into method in player
+            //player.getLoot();
             console.log("You Win!");
             console.log("Player Level: ", player.level)
         }

@@ -1,7 +1,10 @@
 class Enemy {
-    constructor(name, img, health, maxHealth, damage) {
+    constructor(name, className, level, img, health, maxHealth, damage) {
         this.name = name;
+        this.className = className;
+        this.level = level;
         this.img = img;
+        this.level = level;
         this.health = health;
         this.maxHealth = maxHealth;
         this.damage = damage;
@@ -14,7 +17,12 @@ class Enemy {
     get defeated() {
         return(this.health <=0);
     }
+
 }
+/* 
+    might expand enemy class to include loot, with enemy loot being something like 
+    loot: {gold: some amount, potions: some amount}
+*/
 
 
 export default Enemy;

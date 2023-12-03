@@ -1,5 +1,7 @@
-import './VictoryPage.css'
-function VictoryPage({onReturnClick}) {
+import './VictoryPage.css';
+
+
+function VictoryPage({onReturnClick, lootedItems}) {
     return (
         <div className="victoryScreen">
             <p>You Won!</p>

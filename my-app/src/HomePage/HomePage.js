@@ -29,23 +29,42 @@ function EnemyButtons({handleClick, world_level}) {
     }
 }
 
+/*
 
-function HomePage({onEnemyClick, player}) {
+if
+
+
+function EnemyButton({handleClick, enemy}) {
+    <button type="button" 
+        className={`enemyButton ${enemy.className}`}
+        onClick={handleClick}>
+    </button>
+}
+*/
+function HomePage({onEnemyClick, player, enemyData}) {
+
+    let goblin = enemyData[0];
+    let orc = enemyData[1];
 
     return (
         <div>
             <div className="header">
                 <h1>My Game</h1>
                 <p>this is my game</p>
+                <p>Enemies: </p>
+                <ul>
+                    <li>{goblin.name}</li>
+                    <li>{orc.name}</li>
+                </ul>
             </div>
             <div className="game-container">
                 <div id="GameMap">
-                    <EnemyButtons handleClick={onEnemyClick} world_level={player.level}/>
+                    <EnemyButtons handleClick={onEnemyClick} world_level={player.level} />
                 </div> 
                 <div className="game-menu inventory">
                     <h4>Inventory</h4>
                     <p id="gold">Gold: </p>
-                    <p>Health Potions: </p>
+                    <p>Health Potions: {player.potions}</p>
                 </div>
                 <div className="game-menu gear">
                     <h4>Gear</h4>

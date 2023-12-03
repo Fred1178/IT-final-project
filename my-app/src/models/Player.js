@@ -1,5 +1,5 @@
 class Player {
-    constructor({name, img, level, health, maxHealth, armor, damage, potions}) {
+    constructor({name, img, level, health, maxHealth, armor, damage, potions, gold}) {
         this.name = name;
         this.img = img;
         this.level = level;
@@ -8,6 +8,7 @@ class Player {
         this.armor = armor;
         this.damage = damage;
         this.potions = potions;
+        this.gold = gold;
     }
 
     heal(amount) {
@@ -29,6 +30,15 @@ class Player {
     damage: 20,
     potions: 10
     */
+
+    levelUp() {
+        this.level++;
+    }
+
+    getLoot(lootedPotions, lootedGold) {
+        this.gold = this.gold + lootedGold;
+        this.potions = this.potions + lootedPotions;
+    }
     
 };
 
