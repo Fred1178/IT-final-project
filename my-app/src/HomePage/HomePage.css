@@ -44,6 +44,10 @@ background-color: #000000;
     background-color: #000000;
     }
 
+.defeatedEnemy {
+    background-image: url("home-images/red-x.png")
+}
+
 .game-menu {
 padding: 5px;
 border: 2px dotted black;

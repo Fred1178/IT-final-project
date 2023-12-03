@@ -1,9 +1,10 @@
 import './CombatPage.css';
-import Enemy from  './Enemy.js';
+import Enemy from  '../models/Enemy.js';
+import Player from '../models/Player.js';
 import { useState } from 'react';
 
-
-const Player = {
+/*
+export const Player = {
     name: "You",
     img: "",
     level: 1,
@@ -13,7 +14,7 @@ const Player = {
     damage: 20
 };
 
-
+*/
 const Goblin = new Enemy("Goblin", "images/goblin.jpg", 50, 50, 15);
 const Orc = new Enemy("Orc", "",100, 100, 30);
 
@@ -51,24 +52,28 @@ function chooseEnemy(level) {
     }
 }
 
-function CombatPage() {
-    // eslint-disable-next-line
-    const [player, _setPlayer] = useState(Player);
+function CombatPage({player, setPlayer}) {
     const [enemy, setEnemy] = useState(chooseEnemy(player.level));
     
 
     function enemyTakeDamage(enemy, player) {
-        enemy.health = enemy.health - player.damage;
-        setEnemy(enemy);
+        enemy.takeDamage(player.damage);
+        setEnemy(structuredClone(enemy));
         /*
         the console shows the enemy as losing health. The webpage doesn't show it
         */
         console.log(enemy); 
-        if (enemy.health <= 0) {
+        if (enemy.defeated) {
+            player.level++; //turn into method in playerinfo
             console.log("You Win!");
+            console.log("Player Level: ", player.level)
         }
     }
 
+    function playerHeal (player) {
+        player.heal(15);
+        setPlayer(new Player(player));
+    }
 
     return (
         <div>
@@ -81,7 +86,7 @@ function CombatPage() {
                 <div className="log"></div>
                 <EnemyComponent name={enemy.name} imgURL={enemy.img} imgAlt={enemy.name} health={enemy.health} maxHealth={enemy.maxHealth}/>
                 <button type="button" className="combatButton attack" onClick={() => enemyTakeDamage(enemy, player)}>Attack</button>
-                <button type="button" className="combatButton heal">Heal (10) </button>
+                <button type="button" className="combatButton heal" onClick={() => playerHeal(player)}>Heal ({player.potions}) </button>
             </div>
         </div>
     );

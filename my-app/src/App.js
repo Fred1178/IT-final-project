@@ -4,6 +4,8 @@ import HomePage from './HomePage/HomePage';
 import LoginPage from './LoginPage/LoginPage';
 import CombatPage from './CombatPage/CombatPage';
 import VictoryPage from './VictoryPage/VictoryPage';
+import Player from './models/Player';
+
 
 /*
   The app component is how it switches between the different screens in my game.
@@ -11,11 +13,24 @@ import VictoryPage from './VictoryPage/VictoryPage';
   
 */
 
+
 function App() {
+  const [player, setPlayer] = useState(new Player(
+    { name: "You",
+      img: "",
+      level: 2,
+      health: 50,
+      maxHealth: 100,
+      armor: "none",
+      damage: 20,
+      potions: 10
+    }));
+
+
   let HomeScreen = 'home';
   let LoginScreen = 'login';
   let CombatScreen = 'combat';
-  let WinScreen = 'win';
+  //let WinScreen = 'win';
   let CurrentScreen = LoginScreen;
 
   const [screen, setScreen] = useState(CurrentScreen);
@@ -26,13 +41,11 @@ function App() {
       );
     case 'home':
       return (
-        <HomePage onEnemyClick={() => setScreen(CombatScreen)} />
+        <HomePage onEnemyClick={() => setScreen(CombatScreen)} player={player} />
       );
     case 'combat':
       return (
-        //I might do a player level system, where as you defeat an enemy, you go up a level,
-        //when the level goes up,  another enemy will appear
-        <CombatPage /> 
+        <CombatPage player={player} setPlayer={setPlayer}/> 
       );
     case 'win':
       return (

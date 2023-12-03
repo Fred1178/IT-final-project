@@ -1,21 +1,28 @@
 import './HomePage.css';
 
+
+//import { useState } from 'react';
+
 /*
     the main home page of the game. The map shows the different enemies available to fight (marked by skull icon on the map)
     right now there is only one. 
     
 */
-/*
 
-function enemyButtons({handleClick}) {
-    switch(Player.level) {
+
+
+function EnemyButtons({handleClick, world_level}) {
+    switch(world_level) {
         case 1:
             return (
                 <button type="button" className="enemyButton firstEnemy" onClick={handleClick}></button>
             );
         case 2:
             return (
-                <button type="button" className="enemyButton secondEnemy" onClick={handleClick}></button>
+                <div>
+                    <button type="button" className="enemyButton firstEnemy defeatedEnemy"></button>
+                    <button type="button" className="enemyButton secondEnemy" onClick={handleClick}></button>
+                </div>
             );
         default:
             console.log("Error: no enemy chosen");
@@ -23,13 +30,7 @@ function enemyButtons({handleClick}) {
 }
 
 
-<enemyButtons handleClick={onEnemyClick} level={{Player}}/>
-
-*/
-
-
-function HomePage({onEnemyClick}) {
-
+function HomePage({onEnemyClick, player}) {
 
     return (
         <div>
@@ -39,8 +40,7 @@ function HomePage({onEnemyClick}) {
             </div>
             <div className="game-container">
                 <div id="GameMap">
-                    <button type="button" className="enemyButton firstEnemy" onClick={onEnemyClick}></button>
-                    <button type="button" className="enemyButton secondEnemy" onClick={onEnemyClick}></button>
+                    <EnemyButtons handleClick={onEnemyClick} world_level={player.level}/>
                 </div> 
                 <div className="game-menu inventory">
                     <h4>Inventory</h4>
@@ -49,13 +49,13 @@ function HomePage({onEnemyClick}) {
                 </div>
                 <div className="game-menu gear">
                     <h4>Gear</h4>
-                    <p>Weapon: </p>
-                    <p>Armor: </p>
+                    <p>Weapon: {player.weapon}</p>
+                    <p>Armor: {player.armor}</p>
                 </div>
                 <div className="game-menu stats">
                     <h4>Stats</h4>
-                    <p>Health: </p>
-                    <p>Damage: </p>
+                    <p>Health: {player.maxHealth}</p>
+                    <p>Damage: {player.damage}</p>
                 </div>
             </div>
         </div>

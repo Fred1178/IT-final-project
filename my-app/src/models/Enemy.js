@@ -6,6 +6,14 @@ class Enemy {
         this.maxHealth = maxHealth;
         this.damage = damage;
     }
+
+    takeDamage(damageNum) {
+        this.health = Math.max(0, this.health - damageNum);
+    }
+
+    get defeated() {
+        return(this.health <=0);
+    }
 }
 
 
