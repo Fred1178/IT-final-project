@@ -1,7 +1,7 @@
 import './CombatPage.css';
-//import Enemy from  '../models/Enemy.js';
+import Enemy from  '../models/Enemy.js';
 import Player from '../models/Player.js';
-import { useState } from 'react';
+
 
 
 /*
@@ -30,26 +30,23 @@ function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
     );
 }
 
-
-// selects which enemy you fight, based on the player level
-function chooseEnemy(level, enemyData) {
+/*
+function chooseEnemy(level, enemy) {
     switch(level) {
         case 1:
-            return (enemyData[0]);
+            return (Goblin)
         case 2:
-            return (enemyData[1]);
-        default:
-            console.log("Error: no enemy chosen");
+            return (Orc)
     }
-}
+} 
+*/
 
-function CombatPage({player, setPlayer, enemyData}) {
-    const [enemy, setEnemy] = useState(chooseEnemy(player.level, enemyData));
-    
+
+function CombatPage({player, setPlayer, enemy, setEnemy}) {
 
     function enemyTakeDamage(enemy, player) {
         enemy.takeDamage(player.damage);
-        setEnemy(structuredClone(enemy));
+        setEnemy(new Enemy(enemy));
         /*
         the console shows the enemy as losing health. The webpage doesn't show it
         */
