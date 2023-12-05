@@ -9,13 +9,11 @@ import './HomePage.css';
     
 */
 
-
-
 function EnemyButtons({handleClick, world_level}) {
     switch(world_level) {
         case 1:
             return (
-                <button type="button" className="enemyButton firstEnemy" onClick={handleClick}></button>
+                <button type="button" className="firstEnemy enemyButton" onClick={handleClick}></button>
             );
         case 2:
             return (
@@ -40,6 +38,7 @@ function EnemyButton({handleClick, enemy}) {
 */
 
 function HomePage({onEnemyClick, player, enemy}) {
+
     
 
     return (
@@ -47,7 +46,6 @@ function HomePage({onEnemyClick, player, enemy}) {
             <div className="header">
                 <h1>My Game</h1>
                 <p>this is my game</p>
-                <p>{enemy.name}</p>
             </div>
             <div className="game-container">
                 <div id="GameMap">

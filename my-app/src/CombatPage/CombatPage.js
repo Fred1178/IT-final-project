@@ -1,14 +1,11 @@
 import './CombatPage.css';
-import Enemy from  '../models/Enemy.js';
+import Enemy from '../models/Enemy.js';
 import Player from '../models/Player.js';
+;
 
 
 
-/*
-const Goblin = new Enemy("Goblin", 1, "../../public/images/goblin.jpg", 50, 50, 15);
-const Orc = new Enemy("Orc", 2, "",100, 100, 30);
 
-*/
 function PlayerComponent({name, level, health, maxHealth}) {
     return (
         <div className="player">
@@ -29,17 +26,6 @@ function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
         </div>
     );
 }
-
-/*
-function chooseEnemy(level, enemy) {
-    switch(level) {
-        case 1:
-            return (Goblin)
-        case 2:
-            return (Orc)
-    }
-} 
-*/
 
 
 function CombatPage({player, setPlayer, enemy, setEnemy}) {

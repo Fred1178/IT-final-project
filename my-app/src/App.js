@@ -23,9 +23,11 @@ function App() {
   //let WinScreen = 'win';
 
   const [screen, setScreen] = useState(LoginScreen);
+
   //sets the player stats
   const [player, setPlayer] = useState(new Player(
-    { name: "You",
+    { 
+      name: "You",
       img: "",
       level: 1,
       health: 50,
@@ -35,8 +37,8 @@ function App() {
       potions: 10,
       gold: 0
     }));
-
   
+
   //array of enemy objects
   const enemyData = [
     new Enemy("Goblin", "firstEnemy", 1,"images/enemy-images/goblin.jpg", 50, 50, 15),
@@ -59,6 +61,7 @@ function App() {
     setEnemies(newEnemies);
   }
   
+  
 
 
   switch(screen) {
@@ -68,11 +71,11 @@ function App() {
       );
     case 'home':
       return (
-        <HomePage onEnemyClick={() => setScreen(CombatScreen)} player={player} enemy={enemies[getCurrentEnemyIndex(player.level)]} />
+        <HomePage onEnemyClick={() => setScreen(CombatScreen)} player={player} enemy={enemies[getCurrentEnemyIndex(player.level)]}/>
       );
     case 'combat':
       return (
-        <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy}/> 
+        <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy}/>
       );
     case 'win':
       return (
