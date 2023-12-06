@@ -1,7 +1,7 @@
 import './CombatPage.css';
 import Enemy from '../models/Enemy.js';
 import Player from '../models/Player.js';
-;
+
 
 
 

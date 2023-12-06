@@ -24,12 +24,14 @@ function App() {
 
   const [screen, setScreen] = useState(LoginScreen);
 
+  
+
   //sets the player stats
   const [player, setPlayer] = useState(new Player(
     { 
       name: "You",
       img: "",
-      level: 1,
+      level: 2,
       health: 50,
       maxHealth: 100,
       armor: "none",
@@ -50,6 +52,7 @@ function App() {
   const getCurrentEnemyIndex = (level) => {
     const enemyIndex = level - 1;
     if (enemyIndex >= enemies.length) {
+      console.log("Error: enemy index is greater than size of enemies array");
       return enemies.length - 1;
     }
     return enemyIndex;
