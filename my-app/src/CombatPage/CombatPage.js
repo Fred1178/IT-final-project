@@ -33,9 +33,6 @@ function CombatPage({player, setPlayer, enemy, setEnemy}) {
     function enemyTakeDamage(enemy, player) {
         enemy.takeDamage(player.damage);
         setEnemy(new Enemy(enemy));
-        /*
-        the console shows the enemy as losing health. The webpage doesn't show it
-        */
         console.log(enemy); 
         if (enemy.defeated) {
             player.levelUp(); //turn into method in player
@@ -49,7 +46,7 @@ function CombatPage({player, setPlayer, enemy, setEnemy}) {
         player.heal(15);
         setPlayer(new Player(player));
     }
-
+    console.log(enemy);
     return (
         <div>
             <div className="header">

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 5000;
 
 
 const playerData = { 
@@ -18,7 +18,8 @@ const playerData = {
 
 
 app.get('/api/player', (req, resp) => {
-    resp.send(playerData);
+    console.log("Received request");
+    resp.json(playerData);
 });
 
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import HomePage from './HomePage/HomePage';
 import LoginPage from './LoginPage/LoginPage';
@@ -6,6 +6,7 @@ import CombatPage from './CombatPage/CombatPage';
 import VictoryPage from './VictoryPage/VictoryPage';
 import Player from './models/Player';
 import Enemy from './models/Enemy';
+import Enemies from './Enemies.json';
 
 
 /*
@@ -14,6 +15,7 @@ import Enemy from './models/Enemy';
   
 */
 
+const apiRoot = "http://localhost:5000";
 
 function App() {
 
@@ -24,8 +26,20 @@ function App() {
 
   const [screen, setScreen] = useState(LoginScreen);
 
-  
+  const [player, setPlayer] = useState(undefined);  
 
+  async function fetchPlayerData() {
+    const data = await fetch(`${apiRoot}/api/player`)
+      .then(response => {
+        console.log(response)
+        return response.json()
+    
+      });
+    console.log(data);
+    setPlayer(new Player(data));  
+  }
+  useEffect(() => fetchPlayerData());
+  /*
   //sets the player stats
   const [player, setPlayer] = useState(new Player(
     { 
@@ -40,12 +54,10 @@ function App() {
       gold: 0
     }));
   
-
+*/
   //array of enemy objects
-  const enemyData = [
-    new Enemy("Goblin", "firstEnemy", 1,"images/enemy-images/goblin.jpg", 50, 50, 15),
-    new Enemy("Orc", "secondEnemy", 2, "",100, 100, 30)
-  ];
+  const enemyData = Enemies.map(e => new Enemy(e));
+  
 
   const [enemies, setEnemies] = useState(enemyData);
   
@@ -70,7 +82,7 @@ function App() {
   switch(screen) {
     case 'login':
       return (
-        <LoginPage onLoginClick={() => setScreen(HomeScreen)}/>
+        <LoginPage onLoginClick={() => setScreen(HomeScreen)} />
       );
     case 'home':
       return (
