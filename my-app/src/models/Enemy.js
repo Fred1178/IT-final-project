@@ -1,5 +1,5 @@
 class Enemy {
-    constructor({name, className, level, img, health, maxHealth, damage}) {
+    constructor({name, className, level, img, health, maxHealth, damage, loot}) {
         this.name = name;
         this.className = className;
         this.level = level;
@@ -8,6 +8,7 @@ class Enemy {
         this.health = health;
         this.maxHealth = maxHealth;
         this.damage = damage;
+        this.loot = loot;
     }
 
     takeDamage(damageNum) {

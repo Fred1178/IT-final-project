@@ -54,7 +54,7 @@ function HomePage({onEnemyClick, player, enemy}) {
                 <div className="game-menu inventory">
                     <h4>Inventory</h4>
                     <p id="gold">Gold: {player.gold}</p>
-                    <p>Health Potions: {player.potions}</p>
+                    <p>Health Potions: {player.potionNum}</p>
                 </div>
                 <div className="game-menu gear">
                     <h4>Gear</h4>

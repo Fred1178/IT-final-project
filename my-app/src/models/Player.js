@@ -1,5 +1,5 @@
 class Player {
-    constructor({name, img, level, health, maxHealth, armor, damage, potions, gold}) {
+    constructor({name, img, level, health, maxHealth, armor, damage, potionNum, gold}) {
         this.name = name;
         this.img = img;
         this.level = level;
@@ -7,37 +7,39 @@ class Player {
         this.maxHealth = maxHealth;
         this.armor = armor;
         this.damage = damage;
-        this.potions = potions;
+        this.potionNum = potionNum;
         this.gold = gold;
     }
 
+    takeDamage(damageNum) {
+        this.health = Math.max(0, this.health - damageNum);
+    }
+
+
+    
     heal(amount) {
         if(this.health === this.maxHealth) {
             return;
         }
-        if(this.potions > 0) {
+        if(this.potionNum > 0) {
             this.health = Math.min(this.maxHealth, this.health + amount);
-            this.potions--;
+            this.potionNum--;
         }
     }
-    /*
-    name: "You",
-    img: "",
-    level: 1,
-    health: 100,
-    maxHealth: 100,
-    armor: "none",
-    damage: 20,
-    potions: 10
-    */
 
+    //levels up the player
     levelUp() {
         this.level++;
     }
 
+    //adds loot to the player object
     getLoot(lootedPotions, lootedGold) {
         this.gold = this.gold + lootedGold;
-        this.potions = this.potions + lootedPotions;
+        this.potionNum = this.potionNum + lootedPotions;
+    }
+
+    get defeated() {
+        return(this.health <=0);
     }
     
 };

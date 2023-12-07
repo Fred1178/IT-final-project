@@ -6,7 +6,11 @@
         "img": "images/enemy-images/goblin.jpg",
         "health": 50,
         "maxHealth": 50,
-        "damage": 15
+        "damage": 20,
+        "loot": {
+            "gold": 50,
+            "potions": 5
+        }
     },
     {
         "name": "Orc",
@@ -15,6 +19,10 @@
         "img": "",
         "health": 100,
         "maxHealth": 100,
-        "damage": 30
+        "damage": 40,
+        "loot": {
+            "gold": 50,
+            "potions": 5
+        }
     }
 ]

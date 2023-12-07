@@ -6,7 +6,7 @@ const port = 5000;
 const playerData = { 
     name: "You",
     img: "",
-    level: 2,
+    level: 1,
     health: 50,
     maxHealth: 100,
     armor: "none",

@@ -4,6 +4,7 @@ import HomePage from './HomePage/HomePage';
 import LoginPage from './LoginPage/LoginPage';
 import CombatPage from './CombatPage/CombatPage';
 import VictoryPage from './VictoryPage/VictoryPage';
+import GameOverPage from './GameOverPage/GameOver';
 import Player from './models/Player';
 import Enemy from './models/Enemy';
 import Enemies from './Enemies.json';
@@ -15,17 +16,18 @@ import Enemies from './Enemies.json';
   
 */
 
-const apiRoot = "http://localhost:5000";
+//const apiRoot = "http://localhost:5000";
 
 function App() {
 
   const HomeScreen = 'home';
   const LoginScreen = 'login';
   const CombatScreen = 'combat';
-  //let WinScreen = 'win';
+  const WinScreen = 'win';
+  const LossScreen = 'loss';
 
   const [screen, setScreen] = useState(LoginScreen);
-
+  /*
   const [player, setPlayer] = useState(undefined);  
 
   async function fetchPlayerData() {
@@ -39,22 +41,22 @@ function App() {
     setPlayer(new Player(data));  
   }
   useEffect(() => fetchPlayerData());
-  /*
+  */
   //sets the player stats
   const [player, setPlayer] = useState(new Player(
     { 
       name: "You",
       img: "",
-      level: 2,
-      health: 50,
+      level: 1,
+      health: 100,
       maxHealth: 100,
       armor: "none",
       damage: 20,
-      potions: 10,
+      potionNum: 10,
       gold: 0
     }));
   
-*/
+
   //array of enemy objects
   const enemyData = Enemies.map(e => new Enemy(e));
   
@@ -65,6 +67,7 @@ function App() {
     const enemyIndex = level - 1;
     if (enemyIndex >= enemies.length) {
       console.log("Error: enemy index is greater than size of enemies array");
+      
       return enemies.length - 1;
     }
     return enemyIndex;
@@ -90,11 +93,16 @@ function App() {
       );
     case 'combat':
       return (
-        <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy}/>
+        <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy} 
+          onVictory={() => setScreen(WinScreen)}/>
       );
     case 'win':
       return (
         <VictoryPage onReturnClick={() => setScreen(HomeScreen)} />
+      );
+    case 'loss':
+      return (
+        <GameOverPage onRestartClick={() => setScreen(LossScreen)} />
       );
     default:
       console.log("Error: No value for CurrentScreen");
