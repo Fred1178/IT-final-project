@@ -1,5 +1,4 @@
 
-
 .game-container {
     margin: auto;
     display: grid;
@@ -13,9 +12,11 @@
     height: 500px;
     width: 900px;
     border: 2px solid black;
+    
     background-image: url("../../public/images/home-images/world_map.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    
 }
 
 .enemyButton {
@@ -38,6 +39,12 @@
     position: absolute;
     left: 250px;
     top: 120px;    
+}
+
+.thirdEnemy {
+    position: absolute;
+    left: 400px;
+    top: 120px;
 }
 
 .defeatedEnemy {

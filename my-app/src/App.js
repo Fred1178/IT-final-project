@@ -24,7 +24,7 @@ function App() {
   const LoginScreen = 'login';
   const CombatScreen = 'combat';
   const WinScreen = 'win';
-  const LossScreen = 'loss';
+  const GameOverScreen = 'loss';
 
   const [screen, setScreen] = useState(LoginScreen);
   /*
@@ -48,8 +48,8 @@ function App() {
       name: "You",
       img: "",
       level: 1,
-      health: 100,
-      maxHealth: 100,
+      health: 50,
+      maxHealth: 50,
       armor: "none",
       damage: 20,
       potionNum: 10,
@@ -89,20 +89,20 @@ function App() {
       );
     case 'home':
       return (
-        <HomePage onEnemyClick={() => setScreen(CombatScreen)} player={player} enemy={enemies[getCurrentEnemyIndex(player.level)]}/>
+        <HomePage onEnemyClick={() => setScreen(CombatScreen)} player={player} currentEnemy={enemies[getCurrentEnemyIndex(player.level)]}/>
       );
     case 'combat':
       return (
         <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy} 
-          onVictory={() => setScreen(WinScreen)}/>
+          onVictory={() => setScreen(WinScreen)} onDefeat={() => setScreen(GameOverScreen)}/>
       );
     case 'win':
       return (
-        <VictoryPage onReturnClick={() => setScreen(HomeScreen)} />
+        <VictoryPage onReturnClick={() => setScreen(HomeScreen)} enemy={enemies[getCurrentEnemyIndex(player.level-1)]}/>
       );
     case 'loss':
       return (
-        <GameOverPage onRestartClick={() => setScreen(LossScreen)} />
+        <GameOverPage onRestartClick={() => setScreen(LoginScreen)} />
       );
     default:
       console.log("Error: No value for CurrentScreen");

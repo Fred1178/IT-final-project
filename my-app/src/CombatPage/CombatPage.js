@@ -34,7 +34,7 @@ function ConsoleComponent({playerName, playerDamage, enemyName, enemyDamage}) {
     );
 }
 
-function CombatPage({player, setPlayer, enemy, setEnemy, onVictory}) {
+function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
     
     const combatActions = "";
     // when action is taken, it is added to combatActions string
@@ -48,12 +48,22 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory}) {
         console.log(enemy); 
         if (enemy.defeated) {
             player.levelUp();
+            player.health = player.maxHealth;
+            player.getLoot(enemy.loot.potions, enemy.loot.gold);
+            setPlayer(new Player(player));
             // gets loot and adds it to player 
-            player.getLoot();  //randomly generate loot, should it be tied to enemy class?
+            //player.getLoot();  //randomly generate loot, should it be tied to enemy class?
             console.log("You Win!");
             console.log("Player Level: ", player.level)
+            
             onVictory(); //takes player to victory screen
             
+        }
+
+        if (player.defeated) {
+            //need to reset player stats to default.
+            player.health = player.maxHealth;
+            onDefeat();
         }
 
     }
@@ -71,7 +81,7 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory}) {
             </div>
             <div className="game-container">
                 <PlayerComponent name={player.name} level={player.level} health={player.health} maxHealth={player.maxHealth}/>
-                <div className="log">
+                <div className="combatLog">
                     <ConsoleComponent playerName={player.name} enemyName={enemy.name} 
                                       playerDamage={player.damage} enemyDamage={enemy.damage}
                                       combatLog={combatActions}/>

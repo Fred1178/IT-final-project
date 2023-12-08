@@ -4,12 +4,12 @@
         "className": "firstEnemy",
         "level": 1,
         "img": "images/enemy-images/goblin.jpg",
-        "health": 50,
-        "maxHealth": 50,
-        "damage": 20,
+        "health": 60,
+        "maxHealth": 60,
+        "damage": 15,
         "loot": {
-            "gold": 50,
-            "potions": 5
+            "potions": 5,
+            "gold": 20
         }
     },
     {
@@ -19,10 +19,23 @@
         "img": "",
         "health": 100,
         "maxHealth": 100,
-        "damage": 40,
+        "damage": 20,
         "loot": {
-            "gold": 50,
-            "potions": 5
+            "potions": 5,
+            "gold": 50
+        }
+    },
+    {
+        "name": "Troll",
+        "className": "thirdEnemy",
+        "level": 3,
+        "img": "",
+        "health": 200,
+        "maxHealth": 200,
+        "damage": 30,
+        "loot": {
+            "potions": 5,
+            "gold": 100
         }
     }
 ]

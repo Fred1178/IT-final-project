@@ -34,8 +34,8 @@ class Player {
 
     //adds loot to the player object
     getLoot(lootedPotions, lootedGold) {
-        this.gold = this.gold + lootedGold;
         this.potionNum = this.potionNum + lootedPotions;
+        this.gold = this.gold + lootedGold;
     }
 
     get defeated() {
