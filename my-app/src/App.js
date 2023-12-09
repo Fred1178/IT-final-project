@@ -16,7 +16,7 @@ import Enemies from './Enemies.json';
   
 */
 
-//const apiRoot = "http://localhost:5000";
+const apiRoot = "http://localhost:5000";
 
 function App() {
 
@@ -27,8 +27,9 @@ function App() {
   const GameOverScreen = 'loss';
 
   const [screen, setScreen] = useState(LoginScreen);
-  /*
+  
   const [player, setPlayer] = useState(undefined);  
+
 
   async function fetchPlayerData() {
     const data = await fetch(`${apiRoot}/api/player`)
@@ -40,8 +41,10 @@ function App() {
     console.log(data);
     setPlayer(new Player(data));  
   }
-  useEffect(() => fetchPlayerData());
-  */
+
+  useEffect(() => {fetchPlayerData()}, [setPlayer]);
+  
+  /*
   //sets the player stats
   const [player, setPlayer] = useState(new Player(
     { 
@@ -52,11 +55,11 @@ function App() {
       maxHealth: 50,
       armor: "none",
       damage: 20,
-      potionNum: 10,
+      potionNum: 5,
       gold: 0
     }));
   
-
+*/
   //array of enemy objects
   const enemyData = Enemies.map(e => new Enemy(e));
   
@@ -102,7 +105,7 @@ function App() {
       );
     case 'loss':
       return (
-        <GameOverPage onRestartClick={() => setScreen(LoginScreen)} />
+        <GameOverPage onRestartClick={() => setScreen(HomeScreen)} />
       );
     default:
       console.log("Error: No value for CurrentScreen");

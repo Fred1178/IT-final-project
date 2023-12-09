@@ -16,7 +16,7 @@
         "name": "Orc",
         "className": "secondEnemy",
         "level": 2,
-        "img": "",
+        "img": "images/enemy-images/orc.jpg",
         "health": 100,
         "maxHealth": 100,
         "damage": 20,

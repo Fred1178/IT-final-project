@@ -7,7 +7,9 @@ import "./LoginPage.css";
 function LoginPage({onLoginClick}) {
     
     return (
-        <button type="button" className="login" onClick={onLoginClick}>Log in</button>
+        <div className="loginScreen">
+            <button type="button" className="login" onClick={onLoginClick}>Log in</button>
+        </div>
     );
 }
 

@@ -4,7 +4,7 @@ function GameOverPage({onRestartClick}) {
     return (
         <div className="gameOverScreen">
             <p>You Lost</p>
-            <button type="button" onClick={onRestartClick}>Restart</button>
+            <button type="button" onClick={onRestartClick}>Continue</button>
         </div>
     );
 }

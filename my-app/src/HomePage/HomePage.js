@@ -26,7 +26,7 @@ function EnemyButtons({handleClick, world_level}) {
             return (
                 <div>
                     <button type="button" className="enemyButton firstEnemy defeatedEnemy"></button>
-                    <button type="button" className="enemyButton secondEnemy defeatedEnemy" onClick={handleClick}></button>
+                    <button type="button" className="enemyButton secondEnemy defeatedEnemy"></button>
                     <button type="button" className="enemyButton thirdEnemy" onClick={handleClick}></button>
                 </div>
             )

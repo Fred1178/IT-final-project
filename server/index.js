@@ -8,10 +8,10 @@ const playerData = {
     img: "",
     level: 1,
     health: 50,
-    maxHealth: 100,
+    maxHealth: 50,
     armor: "none",
     damage: 20,
-    potions: 10,
+    potionNum: 5,
     gold: 0
 };
 
@@ -19,7 +19,7 @@ const playerData = {
 
 app.get('/api/player', (req, resp) => {
     console.log("Received request");
-    resp.json(playerData);
+    resp.append('Access-Control-Allow-Origin', '*').json(playerData);
 });
 
 app.listen(port, () => {

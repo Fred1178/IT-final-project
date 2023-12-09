@@ -28,7 +28,7 @@ function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
 }
 
 //shows the combat log
-function ConsoleComponent({playerName, playerDamage, enemyName, enemyDamage}) {
+function ConsoleComponent({playerName, playerDamage, enemyName, enemyDamage, combatLog}) {
     return (
         <p>{enemyName} attacks!</p>
     );
@@ -48,11 +48,12 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
         console.log(enemy); 
         if (enemy.defeated) {
             player.levelUp();
+            // resets player health
             player.health = player.maxHealth;
+            // gets loot and adds it to player
             player.getLoot(enemy.loot.potions, enemy.loot.gold);
-            setPlayer(new Player(player));
-            // gets loot and adds it to player 
-            //player.getLoot();  //randomly generate loot, should it be tied to enemy class?
+            setPlayer(new Player(player)); 
+            
             console.log("You Win!");
             console.log("Player Level: ", player.level)
             
@@ -61,15 +62,21 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
         }
 
         if (player.defeated) {
-            //need to reset player stats to default.
+            //resets player health and potions;
             player.health = player.maxHealth;
-            onDefeat();
+            setPlayer(new Player(player));
+
+            //reset enemy health
+            enemy.health = enemy.maxHealth;
+            setEnemy(new Enemy(enemy));
+
+            onDefeat(); //takes player to game over screen
         }
 
     }
 
     function playerHeal (player) {
-        player.heal(15); // maybe have an object for potions, with a property being heal amount
+        player.heal(10); // maybe have an object for health potions, with a property being heal amount
         setPlayer(new Player(player));
     }
     console.log(enemy);

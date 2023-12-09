@@ -6,10 +6,8 @@ function VictoryPage({onReturnClick, enemy}) {
         <div className="victoryScreen">
             <p>You Won!</p>
             <p>You got: </p>
-            <ul>
-                <li>{enemy.loot.potions} potion(s)</li>
-                <li>{enemy.loot.gold} gold</li>
-            </ul>
+            <p>{enemy.loot.potions} potion(s)</p>
+            <p>{enemy.loot.gold} gold</p>
             <button type="button" onClick={onReturnClick}>Return</button>
         </div>
     );
