@@ -13,7 +13,11 @@ function EnemyButtons({handleClick, world_level}) {
     switch(world_level) {
         case 1:
             return (
-                <button type="button" className="enemyButton firstEnemy" onClick={handleClick}></button>
+                <div>
+                    <button type="button" className="enemyButton firstEnemy" onClick={handleClick}></button>
+                    <button type="button" className="enemyButton thirdEnemy" onClick={handleClick}></button>
+                    <button type="button" className="enemyButton fourthEnemy" onClick={handleClick}></button>
+                </div> 
             );
         case 2:
             return (
@@ -28,6 +32,15 @@ function EnemyButtons({handleClick, world_level}) {
                     <button type="button" className="enemyButton firstEnemy defeatedEnemy"></button>
                     <button type="button" className="enemyButton secondEnemy defeatedEnemy"></button>
                     <button type="button" className="enemyButton thirdEnemy" onClick={handleClick}></button>
+                </div>
+            )
+        case 4:
+            return (
+                <div>
+                    <button type="button" className="enemyButton firstEnemy defeatedEnemy"></button>
+                    <button type="button" className="enemyButton secondEnemy defeatedEnemy"></button>
+                    <button type="button" className="enemyButton thirdEnemy defeatedEnemy"></button>
+                    <button type="button" className="enemyButton fourthEnemy" onClick={handleClick}></button>
                 </div>
             )
         default:

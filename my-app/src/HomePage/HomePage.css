@@ -47,6 +47,12 @@
     top: 120px;
 }
 
+.fourthEnemy {
+    position: absolute;
+    left: 560px;
+    top: 120px;
+}
+
 .defeatedEnemy {
     background-image: url("../../public/images/home-images/red-x.png");
 }

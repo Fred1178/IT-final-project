@@ -10,7 +10,7 @@ const playerData = {
     health: 50,
     maxHealth: 50,
     armor: "none",
-    damage: 20,
+    damage: 15,
     potionNum: 5,
     gold: 0
 };

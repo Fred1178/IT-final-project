@@ -97,7 +97,7 @@ function App() {
     case 'combat':
       return (
         <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy} 
-          onVictory={() => setScreen(WinScreen)} onDefeat={() => setScreen(GameOverScreen)}/>
+          onVictory={() => setScreen(HomeScreen)} onDefeat={() => setScreen(GameOverScreen)}/>
       );
     case 'win':
       return (

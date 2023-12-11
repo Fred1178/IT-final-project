@@ -6,9 +6,9 @@
         "img": "images/enemy-images/goblin.jpg",
         "health": 60,
         "maxHealth": 60,
-        "damage": 15,
+        "damage": 20,
         "loot": {
-            "potions": 5,
+            "potions": 10,
             "gold": 20
         }
     },
@@ -19,9 +19,9 @@
         "img": "images/enemy-images/orc.jpg",
         "health": 100,
         "maxHealth": 100,
-        "damage": 20,
+        "damage": 30,
         "loot": {
-            "potions": 5,
+            "potions": 10,
             "gold": 50
         }
     },
@@ -30,12 +30,26 @@
         "className": "thirdEnemy",
         "level": 3,
         "img": "",
+        "health": 150,
+        "maxHealth": 150,
+        "damage": 40,
+        "loot": {
+            "potions": 5,
+            "gold": 100
+        }
+    },
+    {
+        "name": "Warg Rider",
+        "className": "fourthEnemy",
+        "level": 4,
+        "img": "",
         "health": 200,
         "maxHealth": 200,
-        "damage": 30,
+        "damage": 35,
         "loot": {
             "potions": 5,
             "gold": 100
         }
     }
+    
 ]

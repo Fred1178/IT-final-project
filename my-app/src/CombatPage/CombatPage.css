@@ -42,6 +42,7 @@
 .combatLog {
     grid-row: 1 / 11;
     grid-column: 11 / 16;
+    overflow-y: auto;
 }
 
 .enemy {
@@ -52,5 +53,10 @@
 }
 
 .name {
+    text-align: center;
+}
+
+.victoryPortal {
+    margin: auto;
     text-align: center;
 }

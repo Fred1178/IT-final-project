@@ -30,6 +30,10 @@ class Player {
     //levels up the player
     levelUp() {
         this.level++;
+        //increases maxHealth 
+        this.maxHealth = this.maxHealth + 30;
+        //increases damage
+        this.damage = this.damage + 10;
     }
 
     //adds loot to the player object

@@ -1,4 +1,5 @@
 import './CombatPage.css';
+
 import { useState } from 'react';
 import Enemy from '../models/Enemy.js';
 import Player from '../models/Player.js';
@@ -28,25 +29,22 @@ function EnemyComponent({name, imgURL, imgAlt, health, maxHealth}) {
     );
 }
 
-/*
-    combatLog = [
-        "...",
-        "..."
-    ]
-
- */
-
 //shows the combat log
-function ConsoleComponent({combatLog}) {
+function ConsoleComponent({combatLog, enemy}) {
     return (
         <div id="combat-log">
+            <p>A {enemy.name} attacks!</p>
             {combatLog.map((logEntry) => (<p>{logEntry}</p>))}
         </div>
     );
 }
 
 function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat, combatActions, setCombatActions) {
-    const combatLog = [];
+    const combatLog = [ ];
+    
+    //store sthe number of potions player has
+    //so it can be reset after battle
+    let savedPotionNum = player.potionNum;
 
     enemy.takeDamage(player.damage);
     setEnemy(new Enemy(enemy));
@@ -55,6 +53,7 @@ function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat
     player.takeDamage(enemy.damage);
     setPlayer(new Player(player));
     combatLog.push(`${player.name} took ${enemy.damage} points of damage!`);
+    
 
     if (enemy.defeated) {
         combatLog.push(`${enemy.name} is defeated!`);
@@ -62,14 +61,15 @@ function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat
         combatLog.push(`${player.name} levels up to level ${player.level}`);
         // resets player health
         player.health = player.maxHealth;
-        player.maxHealth = player.maxHealth + 20;
         combatLog.push(`${player.name}'s max health increases to ${player.maxHealth}`);
+
         // gets loot and adds it to player
         player.getLoot(enemy.loot.potions, enemy.loot.gold);
         combatLog.push(`${player.name} takes ${enemy.loot.potions} potions and ${enemy.loot.gold} pieces of gold.`);
         setPlayer(new Player(player));
 
-        // onVictory(); //takes player to victory screen
+        savedPotionNum = player.potionNum
+        onVictory(); //takes player to victory screen
 
     }
 
@@ -78,6 +78,7 @@ function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat
         combatLog.push("TRY AGAIN...");
         //resets player health and potions;
         player.health = player.maxHealth;
+        player.potionNum = savedPotionNum;
         setPlayer(new Player(player));
 
         //reset enemy health
@@ -91,16 +92,18 @@ function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat
 }
 
 function playerHeal(player, setPlayer, combatActions, setCombatActions) {
-    player.heal(10); // maybe have an object for health potions, with a property being heal amount
+    player.heal(15); // maybe have an object for health potions, with a property being heal amount
     setCombatActions([...combatActions, `${player.name} drinks a potion and gains 10 health.`]);
     setPlayer(new Player(player));
 }
 
 
 function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
+
     const [combatActions, setCombatActions] = useState([]);
     // when action is taken, it is added to combatActions string
     console.log(enemy);
+
     return (
         <div>
             <div className="header">
@@ -110,8 +113,7 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
             <div className="game-container">
                 <PlayerComponent name={player.name} level={player.level} health={player.health} maxHealth={player.maxHealth}/>
                 <div className="combatLog">
-                    <ConsoleComponent playerName={player.name} enemyName={enemy.name} 
-                                      playerDamage={player.damage} enemyDamage={enemy.damage}
+                    <ConsoleComponent player={player} enemy={enemy} 
                                       combatLog={combatActions}/>
                 </div>
                 <EnemyComponent name={enemy.name} imgURL={enemy.img} imgAlt={enemy.name} health={enemy.health} maxHealth={enemy.maxHealth}/>
