@@ -51,7 +51,9 @@ function App() {
   useEffect(() =>{fetchPlayerData()}, [setDefault]);
 
   
-  
+  //stores the the amount of potions the player has
+  const [savedPotions, setPotions] = useState(undefined);
+
   //array of enemy objects
   const enemyData = Enemies.map(e => new Enemy(e));
   
@@ -73,7 +75,7 @@ function App() {
     newEnemies[getCurrentEnemyIndex(player.level)] = enemy;
     setEnemies(newEnemies);
   }
-  
+
   
 
 
@@ -89,7 +91,8 @@ function App() {
     case 'combat':
       return (
         <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy} 
-          onVictory={() => setScreen(WinScreen)} onDefeat={() => setScreen(GameOverScreen)}/>
+          onVictory={() => setScreen(WinScreen)} onDefeat={() => setScreen(GameOverScreen)} 
+          savedPotions={savedPotions} setPotions={setPotions}/>
       );
     case 'win':
       return (
@@ -98,6 +101,8 @@ function App() {
       );
     case 'loss':
       return (
+        //right now, game over restarts the whole game, I plan to have it just reset to the homescreen
+        //with the stats you had before the previous fight, might use state for this
         <GameOverPage onRetryClick={() => setScreen(HomeScreen)} />
       );
     case 'end':

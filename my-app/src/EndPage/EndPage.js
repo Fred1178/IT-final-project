@@ -5,7 +5,8 @@ function EndPage({resetGame, onRestartClick}) {
     return (
         <div>
             <p>You have reached the end of the demo!</p>
-            <button type="button" onClick={onRestartClick}>Play again</button>
+            <p>Thank you for Playing!</p>
+            <button type="button" onClick={onRestartClick}>Play again?</button>
         </div>
     );   
 }

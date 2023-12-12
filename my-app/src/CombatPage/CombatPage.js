@@ -40,13 +40,12 @@ function ConsoleComponent({combatLog, enemy}) {
 }
 
 
-function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat, combatActions, setCombatActions) {
+function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat, combatActions, setCombatActions, savedPotions, setPotions) {
     const combatLog = [ ];
     
     //store sthe number of potions player has
     //so it can be reset after battle
-    const savedPotionNum = player.potionNum;
-
+    
     enemy.takeDamage(player.damage);
     setEnemy(new Enemy(enemy));
     combatLog.push(`${enemy.name} took ${player.damage} points of damage!`);
@@ -61,16 +60,17 @@ function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat
         //instead of whole new page. loot and level up messages will
         //be pushed to combatLog
 
-        combatLog.push(`${enemy.name} is defeated!`);
+        //combatLog.push(`${enemy.name} is defeated!`);
         player.levelUp();
         //combatLog.push(`${player.name} levels up to level ${player.level}`);
 
-        // resets player health
+        // resets player health 
         player.health = player.maxHealth;
         //combatLog.push(`${player.name}'s max health increases to ${player.maxHealth}`);
 
         // gets loot and adds it to player
         player.getLoot(enemy.loot.potions, enemy.loot.gold);
+        setPotions(player.potionNum); //saves the potion number
         //combatLog.push(`${player.name} takes ${enemy.loot.potions} potions and ${enemy.loot.gold} pieces of gold.`);
         setPlayer(new Player(player));
 
@@ -79,26 +79,26 @@ function enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat
     }
 
     if (player.defeated) {
+        // game restarts on player defeat, so no need for this yet
         //combatLog.push(`${player.name} is defeated by ${enemy.name}!`);
         //combatLog.push("TRY AGAIN...");
 
         //resets player health and potions;
         player.health = player.maxHealth;
-        player.potionNum = savedPotionNum;
+        player.potionNum = savedPotions;
         setPlayer(new Player(player));
 
         //reset enemy health
         enemy.health = enemy.maxHealth;
         setEnemy(new Enemy(enemy));
-
+        
         onDefeat(); //takes player to game over screen
     }
     
     setCombatActions(combatActions.concat(combatLog));
 }
 
-function playerHeal(player, setPlayer, enemy, setEnemy, combatActions, setCombatActions, onDefeat) {
-    const savedPotionNum = player.potionNum;
+function playerHeal(player, setPlayer, enemy, setEnemy, combatActions, setCombatActions, onDefeat, savedPotions) {
     const combatLog = [ ];
     
     player.heal(50); // maybe have an object for health potions, with a property being heal amount
@@ -110,18 +110,18 @@ function playerHeal(player, setPlayer, enemy, setEnemy, combatActions, setCombat
     combatLog.push(`${player.name} took ${enemy.damage} points of damage!`);
 
     if (player.defeated) {
-        //combatLog.push(`${player.name} is defeated by ${enemy.name}!`);
-        //combatLog.push("TRY AGAIN...");
+        combatLog.push(`${player.name} is defeated by ${enemy.name}!`);
+        combatLog.push("TRY AGAIN...");
 
         //resets player health and potions;
         player.health = player.maxHealth;
-        player.potionNum = savedPotionNum;
+        player.potionNum = savedPotions
         setPlayer(new Player(player));
 
         //reset enemy health
         enemy.health = enemy.maxHealth;
         setEnemy(new Enemy(enemy));
-
+        
         onDefeat(); //takes player to game over screen
     }
     
@@ -130,11 +130,12 @@ function playerHeal(player, setPlayer, enemy, setEnemy, combatActions, setCombat
 
 
 
-function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
+function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat, savedPotions, setPotions}) {
 
     const [combatActions, setCombatActions] = useState([]);
     // when action is taken, it is added to combatActions string
     console.log(enemy);
+
 
     return (
         <div>
@@ -152,12 +153,14 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat}) {
                 <button
                     type="button"
                     className="combatButton attack"
-                    onClick={() => enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat, combatActions, setCombatActions)}
+                    onClick={() => enemyTakeDamage(enemy, setEnemy, player, setPlayer, onVictory, onDefeat, combatActions, setCombatActions,
+                        savedPotions, setPotions)}
                 >Attack</button>
                 <button
                     type="button"
                     className="combatButton heal"
-                    onClick={() => playerHeal(player, setPlayer, enemy, setEnemy, combatActions, setCombatActions, onDefeat)}
+                    onClick={() => playerHeal(player, setPlayer, enemy, setEnemy, combatActions, setCombatActions, 
+                        onDefeat, savedPotions)}
                 >Heal ({player.potionNum}) </button>
             </div>
         </div>
