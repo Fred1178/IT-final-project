@@ -9,7 +9,8 @@ const playerData = {
     level: 1,
     health: 50,
     maxHealth: 50,
-    armor: "none",
+    weapon: "longsword",
+    armor: "leather armor",
     damage: 15,
     potionNum: 5,
     gold: 0

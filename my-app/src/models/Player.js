@@ -1,10 +1,11 @@
 class Player {
-    constructor({name, img, level, health, maxHealth, armor, damage, potionNum, gold}) {
+    constructor({name, img, level, health, maxHealth, weapon, armor, damage, potionNum, gold}) {
         this.name = name;
         this.img = img;
         this.level = level;
         this.health = health;
         this.maxHealth = maxHealth;
+        this.weapon = weapon;
         this.armor = armor;
         this.damage = damage;
         this.potionNum = potionNum;
