@@ -1,10 +1,10 @@
 import './GameOver.css';
 
-function GameOverPage({onRestartClick}) {
+function GameOverPage({onRetryClick}) {
     return (
         <div className="gameOverScreen">
             <p>You Lost</p>
-            <button type="button" onClick={onRestartClick}>Continue</button>
+            <button type="button" onClick={onRetryClick}>Retry</button>
         </div>
     );
 }

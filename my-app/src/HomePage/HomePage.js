@@ -15,8 +15,6 @@ function EnemyButtons({handleClick, world_level}) {
             return (
                 <div>
                     <button type="button" className="enemyButton firstEnemy" onClick={handleClick}></button>
-                    <button type="button" className="enemyButton thirdEnemy" onClick={handleClick}></button>
-                    <button type="button" className="enemyButton fourthEnemy" onClick={handleClick}></button>
                 </div> 
             );
         case 2:
@@ -50,6 +48,7 @@ function EnemyButtons({handleClick, world_level}) {
 
 /*
 //maybe something like if enemy.level is less than world_level, className={firstEnemy defeatedEnemy}
+//more dynamically render the enemy buttons so i can get rid of switch statement
 function EnemyButton({handleClick, world_level, enemy}) {
     return (
         <button type="button" className={`enemyButton ${enemy.className} ${(enemy.level < world_level) ? 'defeatedEnemy' : ''}`} onClick={handleClick}></button>
