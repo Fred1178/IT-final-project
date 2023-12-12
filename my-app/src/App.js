@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import HomePage from './HomePage/HomePage';
 import LoginPage from './LoginPage/LoginPage';
 import CombatPage from './CombatPage/CombatPage';
+import VictoryPage from './VictoryPage/VictoryPage';
+import GameOverPage from './GameOverPage/GameOver';
+import EndPage from './EndPage/EndPage';
+import Player from './models/Player';
+import Enemy from './models/Enemy';
+import Enemies from './Enemies.json';
+
 
 /*
   The app component is how it switches between the different screens in my game.
@@ -10,28 +17,93 @@ import CombatPage from './CombatPage/CombatPage';
   
 */
 
+const apiRoot = "http://localhost:5000";
+
 function App() {
-  let HomeScreen = 'home';
-  let LoginScreen = 'login';
-  let CombatScreen = 'combat';
-  let CurrentScreen = LoginScreen;
+
+  const HomeScreen = 'home';
+  const LoginScreen = 'login';
+  const CombatScreen = 'combat';
+  const WinScreen = 'win';
+  const GameOverScreen = 'loss';
+  const EndScreen = 'end';
+
+  const [screen, setScreen] = useState(LoginScreen);
+  
+  const [player, setPlayer] = useState(undefined);  
+  const [defaultPlayer, setDefault] = useState(undefined);
+
+
+  async function fetchPlayerData() {
+    const data = await fetch(`${apiRoot}/api/player`)
+      .then(response => {
+        console.log(response)
+        return response.json()
+    
+      });
+    console.log(data);
+    setPlayer(new Player(data));
+    setDefault(new Player(data));  
+  }
+
+  useEffect(() => {fetchPlayerData()}, [setPlayer]);
+  //stores the default player data so that it can be reset
+  useEffect(() =>{fetchPlayerData()}, [setDefault]);
 
   
+  
+  //array of enemy objects
+  const enemyData = Enemies.map(e => new Enemy(e));
+  
 
-  const [screen, setScreen] = useState(CurrentScreen);
+  const [enemies, setEnemies] = useState(enemyData);
+  
+  const getCurrentEnemyIndex = (level) => {
+    const enemyIndex = level - 1;
+    if (enemyIndex >= enemies.length) {
+      console.log("Error: enemy index is greater than size of enemies array");
+      //sends player to endscreen once they run out of enemies
+      return setScreen(EndScreen);
+    }
+    return enemyIndex;
+  }
+
+  const setEnemy = (enemy) => {
+    const newEnemies = [...enemies];
+    newEnemies[getCurrentEnemyIndex(player.level)] = enemy;
+    setEnemies(newEnemies);
+  }
+  
+  
+
+
   switch(screen) {
     case 'login':
       return (
-        <LoginPage onLoginClick={() => setScreen(HomeScreen)}/>
+        <LoginPage onLoginClick={() => setScreen(HomeScreen)} />
       );
     case 'home':
       return (
-        <HomePage onEnemyClick={() => setScreen(CombatScreen)}/>
+        <HomePage onEnemyClick={() => setScreen(CombatScreen)} player={player} currentEnemy={enemies[getCurrentEnemyIndex(player.level)]}/>
       );
     case 'combat':
       return (
-        <CombatPage />
-      ); 
+        <CombatPage player={player} setPlayer={setPlayer} enemy={enemies[getCurrentEnemyIndex(player.level)]} setEnemy={setEnemy} 
+          onVictory={() => setScreen(WinScreen)} onDefeat={() => setScreen(GameOverScreen)}/>
+      );
+    case 'win':
+      return (
+        <VictoryPage onReturnClick={() => setScreen(HomeScreen)} enemy={enemies[getCurrentEnemyIndex(player.level-1)]}
+          player={player}/>
+      );
+    case 'loss':
+      return (
+        <GameOverPage onRetryClick={() => setScreen(HomeScreen)} />
+      );
+    case 'end':
+      return (
+        <EndPage resetGame={() => setPlayer(defaultPlayer)} onRestartClick={() => setScreen(LoginScreen)}/>
+      );
     default:
       console.log("Error: No value for CurrentScreen");
   }
