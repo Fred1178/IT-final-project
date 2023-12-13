@@ -8,6 +8,7 @@ function LoginPage({onLoginClick}) {
     
     return (
         <div className="loginScreen">
+            <p>Simple RPG Game</p>
             <button type="button" className="login" onClick={onLoginClick}> Play </button>
         </div>
     );
