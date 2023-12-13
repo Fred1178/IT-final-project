@@ -8,10 +8,13 @@ import Player from '../models/Player.js';
 
 
 
-function PlayerComponent({name, level, health, maxHealth}) {
+function PlayerComponent({name, level, imgURL, health, maxHealth}) {
     return (
         <div className="player">
                 <p className="name">{name}: Lv.{level}</p>
+                <div className="image_player">
+                    <img src={imgURL}/>
+                </div>
                 <p>Health: {health} / {maxHealth}</p>
         </div>
     );
@@ -144,7 +147,7 @@ function CombatPage({player, setPlayer, enemy, setEnemy, onVictory, onDefeat, sa
                 <p>this is my game</p>
             </div>
             <div className="game-container">
-                <PlayerComponent name={player.name} level={player.level} health={player.health} maxHealth={player.maxHealth}/>
+                <PlayerComponent name={player.name} level={player.level} imgURL={player.img} health={player.health} maxHealth={player.maxHealth}/>
                 <div className="combatLog">
                     <ConsoleComponent player={player} enemy={enemy} 
                                       combatLog={combatActions}/>
