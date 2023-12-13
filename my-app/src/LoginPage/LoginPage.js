@@ -8,7 +8,7 @@ function LoginPage({onLoginClick}) {
     
     return (
         <div className="loginScreen">
-            <button type="button" className="login" onClick={onLoginClick}>Log in</button>
+            <button type="button" className="login" onClick={onLoginClick}> Play </button>
         </div>
     );
 }
